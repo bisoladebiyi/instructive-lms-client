@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import "tailwindcss";
+
+
+* {
+  box-sizing: border-box;
+}
+
+body, .App, #root, html {
+  height: 100%;
+  font-family: 'Sora', Arial, sans-serif;
+}
