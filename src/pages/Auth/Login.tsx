@@ -1,13 +1,18 @@
 import { useId } from "react";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { IROUTES } from "../../utils/constants/routes";
 import Logo from "../../components/ui/Logo";
 import { HiOutlineExternalLink } from "react-icons/hi";
 
-const SignUp = () => {
+const Login = () => {
   const id = useId();
+  const navigate = useNavigate();
+
+  const onLogIn = () => {
+    navigate(IROUTES.DASHBOARD);
+  };
   return (
     <div className="h-full bg-gray-50 flex flex-col items-center justify-center relative">
       <Logo className="fixed top-3 left-3" />
@@ -35,7 +40,7 @@ const SignUp = () => {
           name="password"
           className="mb-3"
         />
-        <Button text="Log in" className="w-full" />
+        <Button onClick={onLogIn} text="Log in" className="w-full" />
       </form>
       <p className="text-sm mt-4">
         Don't have an account?{" "}
@@ -50,4 +55,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
