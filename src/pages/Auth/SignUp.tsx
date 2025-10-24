@@ -1,13 +1,18 @@
 import { useId } from "react";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { IROUTES } from "../../utils/constants/routes";
 import Logo from "../../components/ui/Logo";
 import { HiOutlineExternalLink } from "react-icons/hi";
 
 const SignUp = () => {
   const id = useId();
+  const navigate = useNavigate();
+
+  const onSignUp = () => {
+    navigate(IROUTES.DASHBOARD);
+  };
   return (
     <div className="h-full bg-gray-50 flex flex-col items-center justify-center relative">
       <Logo className="fixed top-3 left-3" />
@@ -58,7 +63,7 @@ const SignUp = () => {
           name="cPassword"
           className="mb-3"
         />
-        <Button text="Sign up" className="w-full" />
+        <Button onClick={onSignUp} text="Sign up" className="w-full" />
       </form>
       <p className="text-sm mt-4">
         Already have an account?{" "}
