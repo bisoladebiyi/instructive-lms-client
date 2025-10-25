@@ -3,26 +3,32 @@ import { FaFileLines } from "react-icons/fa6";
 import { MdNoteAdd } from "react-icons/md";
 import { IoPeople } from "react-icons/io5";
 import { FaGear } from "react-icons/fa6";
+import { IROUTES } from "./routes";
 
 export const navItems = [
     {
         text: "Dashboard",
-        icon: GoHomeFill
+        icon: GoHomeFill,
+        link: IROUTES.DASHBOARD
     },
     {
         text: "Courses",
-        icon: FaFileLines
+        icon: FaFileLines,
+        link: IROUTES.COURSES
     },
     {
         text: "Create Course",
-        icon: MdNoteAdd
+        icon: MdNoteAdd,
+        link: IROUTES.COURSE_CREATE
     },
     {
         text: "Students",
-        icon: IoPeople
+        icon: IoPeople,
+        link: IROUTES.STUDENTS
     },
     {
         text: "Settings",
-        icon: FaGear
+        icon: FaGear,
+        link: IROUTES.SETTINGS
     }
 ]
