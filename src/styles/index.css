@@ -4,9 +4,15 @@
 
 * {
   box-sizing: border-box;
+  list-style: disc;
 }
 
 body, .App, #root, html {
   height: 100%;
   font-family: 'Sora', Arial, sans-serif;
+}
+
+div.MuiBox-root {
+  height: 100%;
+  padding-bottom: 70px;
 }

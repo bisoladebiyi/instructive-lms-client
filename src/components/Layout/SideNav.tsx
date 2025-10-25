@@ -1,7 +1,7 @@
 import { navItems } from "../../utils/constants/navItems";
 import { TbLogout } from "react-icons/tb";
 import { IROUTES } from "../../utils/constants/routes";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type { ISideNav } from "../../interfaces/Layout.interface";
 import Logo from "../ui/Logo";
 
@@ -20,20 +20,23 @@ const Sidenav = ({ page }: ISideNav) => {
           alt=""
         />
         <p className="text-lg font-normal mt-1">Abisola Adebiyi</p>
-        <p className="font-extralight mt-1">Instructor</p>
+        <p className="font-extralight text-gray-300 text-xs">Instructor</p>
       </div>
 
-      <ul className="mt-5">
+      <ul className="mt-5 list-none">
         {navItems.map((item) => (
-          <li
-            key={item.text}
-            className={`flex gap-2 p-3 text-sm font-light items-center hover:bg-gray-50/10 ${
-              page === item.text ? "bg-gray-50/10" : ""
-            } rounded mb-3 cursor-pointer transition-colors`}
-          >
-            <item.icon className="text-xl" />
-            <span>{item.text}</span>
-          </li>
+          <Link to={item.link} key={item.text}>
+            <li
+              className={`flex gap-2 p-3 text-sm font-light items-center hover:bg-gray-50/10 ${
+                page === item.link || page?.includes(item.link)
+                  ? "bg-gray-50/10"
+                  : ""
+              } rounded mb-3 cursor-pointer transition-colors`}
+            >
+              <item.icon className="text-xl" />
+              <span>{item.text}</span>
+            </li>
+          </Link>
         ))}
       </ul>
       <Logo className="text-white absolute bottom-5 left-5 text-[13px]" />
