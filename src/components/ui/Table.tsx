@@ -12,7 +12,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.action.hover,
     color: theme.palette.common.black,
-    fontWeight: 600,
+    fontWeight: 550,
     textTransform: "capitalize",
   },
   [`&.${tableCellClasses.body}`]: {
