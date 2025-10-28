@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Dashboard from "./pages/Instructor/Dashboard/index.tsx";
 import Courses from "./pages/Instructor/Courses/index.tsx";
 import CourseDetails from "./pages/Instructor/CourseDetails/index.tsx";
+import CreateCourse from "./pages/Instructor/Courses/CreateCourse.tsx";
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,8 @@ function App() {
         <Route path={IROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={IROUTES.COURSES} element={<Courses />} />
         <Route path={IROUTES.COURSE} element={<CourseDetails />} />
+        <Route path={IROUTES.COURSE_CREATE} element={<CreateCourse />} />
+        <Route path={IROUTES.COURSE_EDIT} element={<CreateCourse />} />
       </Routes>
     </div>
   );

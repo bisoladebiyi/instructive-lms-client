@@ -16,8 +16,10 @@
     "@mui/material": "^7.3.4",
     "@tailwindcss/vite": "^4.1.15",
     "dompurify": "^3.3.0",
+    "font-awesome": "^4.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-froala-wysiwyg": "^4.6.2",
     "react-icons": "^5.5.0",
     "react-router": "^7.9.4",
     "tailwindcss": "^4.1.15"
