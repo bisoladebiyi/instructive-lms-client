@@ -3,6 +3,7 @@ import { IROUTES } from "../../../utils/constants/routes";
 import CourseOverview from "./CourseOverview";
 import VerticalTabs from "../../../components/ui/VerticalTabs";
 import Curriculum from "./Curriculum";
+import { Link } from "react-router";
 
 const CourseDetails = () => {
   const courseTabs = [
@@ -16,10 +17,12 @@ const CourseDetails = () => {
           <p>Introduction to node.js - A beginner's guide</p>
 
           <div>
-            {/* change to link  */}
-            <button className="underline text-xs mr-5 cursor-pointer">
+            <Link
+              to={IROUTES.COURSES + `/edit/${5}`}
+              className="underline text-xs mr-5 cursor-pointer"
+            >
               Edit
-            </button>
+            </Link>
             <button className="bg-cyan-600 p-3 rounded text-xs cursor-pointer">
               Publish
             </button>

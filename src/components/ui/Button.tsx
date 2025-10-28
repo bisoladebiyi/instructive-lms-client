@@ -1,9 +1,15 @@
-import type { IButton } from '../../interfaces/Button.interface'
+import type { IButton } from "../../interfaces/Button.interface";
 
-const Button = ({className, text, onClick, type = "button"}: IButton) => {
+const Button = ({ className, text, onClick, type = "button" }: IButton) => {
   return (
-    <button onClick={onClick} type={type} className={`bg-black text-white p-3 rounded font-light text-sm uppercase ${className}`}>{text}</button>
-  )
-}
+    <button
+      onClick={onClick}
+      type={type}
+      className={`bg-black text-white p-3 rounded font-light text-sm uppercase cursor-pointer ${className}`}
+    >
+      {text}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

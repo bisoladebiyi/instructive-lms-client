@@ -11,6 +11,12 @@ const Sidenav = ({ page }: ISideNav) => {
   const logOut = () => {
     navigate(IROUTES.LOGIN);
   };
+
+  // move to helpers
+  const isCourseEdit = (text: string) =>
+    page === IROUTES.COURSE_EDIT && text.toLowerCase() === "courses";
+  const isCourseDetails = (text: string) =>
+    page === IROUTES.COURSE && text.toLowerCase() === "courses";
   return (
     <aside className="w-1/6 bg-gray-800 text-white p-3 relative">
       <div className="text-center text-sm flex flex-col justify-center items-center w-full mt-3">
@@ -28,7 +34,9 @@ const Sidenav = ({ page }: ISideNav) => {
           <Link to={item.link} key={item.text}>
             <li
               className={`flex gap-2 p-3 text-sm font-light items-center hover:bg-gray-50/10 ${
-                page === item.link || page?.includes(item.link)
+                page === item.link ||
+                isCourseEdit(item.text) ||
+                isCourseDetails(item.text)
                   ? "bg-gray-50/10"
                   : ""
               } rounded mb-3 cursor-pointer transition-colors`}
