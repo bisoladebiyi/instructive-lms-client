@@ -6,7 +6,7 @@ import { IoIosSearch } from "react-icons/io";
 
 const Courses = () => {
   return (
-    <Layout page={IROUTES.COURSES}>
+    <Layout parentPage={IROUTES.COURSES} pageHeading={"Courses"}>
       <>
         {/* search and filter  */}
         <div className="my-5 flex justify-between items-center">

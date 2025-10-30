@@ -30,7 +30,10 @@ const CreateCourse = () => {
     );
   };
   return (
-    <Layout page={courseId ? IROUTES.COURSE_EDIT : IROUTES.COURSE_CREATE}>
+    <Layout
+      parentPage={courseId ? IROUTES.COURSE_EDIT : IROUTES.COURSE_CREATE}
+      pageHeading={courseId ? "Edit Course" : "Create Course"}
+    >
       <div className="w-full">
         <form
           action=""

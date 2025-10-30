@@ -2,21 +2,17 @@ import SideNav from "./SideNav";
 import TopNav from "./TopNav";
 import { navItems } from "../../utils/constants/navItems";
 import type { ILayout } from "../../interfaces/Layout.interface";
-import { IROUTES } from "../../utils/constants/routes";
 
-const Layout = ({ children, page = navItems[0].link }: ILayout) => {
-  let pageName = navItems.find((item) => item.link === page)?.text;
-  const isCourseEdit = page === IROUTES.COURSE_EDIT;
-
-  if (isCourseEdit) {
-    pageName = "Edit Course";
-  }
-
+const Layout = ({
+  children,
+  parentPage = navItems[0].link,
+  pageHeading,
+}: ILayout) => {
   return (
     <div className="h-full flex">
-      <SideNav page={page} />
+      <SideNav parentPage={parentPage} />
       <div className="p-7 w-full h-full overflow-auto">
-        <TopNav text={pageName} />
+        <TopNav text={pageHeading} />
         <main className="h-full">{children}</main>
       </div>
     </div>
