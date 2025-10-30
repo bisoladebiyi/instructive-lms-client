@@ -1,36 +1,36 @@
 export const StudentsTable = {
-    columns: ["name", "course", "progress", "last_active"],
-    rows: [
-        {
-            name: "Abisola Adebiyi",
-            course: "Introduction to node.js - A beginner's guide",
-            progress: "80%",
-            last_active: "3 hours ago"
-        },
-        {
-            name: "Osman Sharif",
-            course: "Introduction to node.js - A beginner's guide",
-            progress: "80%",
-            last_active: "3 hours ago"
-        },
-        {
-            name: "Adetimilehin Adeyosola",
-            course: "Introduction to node.js - A beginner's guide",
-            progress: "80%",
-            last_active: "3 hours ago"
-        },
-        {
-            name: "Bodunde Adebiyi",
-            course: "Introduction to node.js - A beginner's guide",
-            progress: "80%",
-            last_active: "3 hours ago"
-        }
-    ]
+  columns: ["name", "course", "progress", "last_active"],
+  rows: [
+    {
+      name: "Abisola Adebiyi",
+      course: "Introduction to node.js - A beginner's guide",
+      progress: "80%",
+      last_active: "3 hours ago"
+    },
+    {
+      name: "Osman Sharif",
+      course: "Introduction to node.js - A beginner's guide",
+      progress: "80%",
+      last_active: "3 hours ago"
+    },
+    {
+      name: "Adetimilehin Adeyosola",
+      course: "Introduction to node.js - A beginner's guide",
+      progress: "80%",
+      last_active: "3 hours ago"
+    },
+    {
+      name: "Bodunde Adebiyi",
+      course: "Introduction to node.js - A beginner's guide",
+      progress: "80%",
+      last_active: "3 hours ago"
+    }
+  ]
 }
 
 export const course = {
-    title: "Introduction to node.js - A beginner's guide",
-    description: `
+  title: "Introduction to node.js - A beginner's guide",
+  description: `
     <div style="font-family: 'Inter', sans-serif; line-height: 1.7; color: #333;">
       <h2 style="color: #2a7ae4; margin-bottom: 8px;">Welcome to the Course!</h2>
       <p style="margin-bottom: 16px;">
@@ -71,21 +71,21 @@ export const course = {
       </p>
     </div>
   `,
-    bannerUrl:
-        "https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75",
-    instructor: {
-        name: "Abisola Adebiyi",
-        avatarUrl: "https://avatar.iran.liara.run/public/job/teacher/male",
-    },
-    duration: "8h 30m",
-    lessons: 24,
-    rating: 4.8,
+  bannerUrl:
+    "https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75",
+  instructor: {
+    name: "Abisola Adebiyi",
+    avatarUrl: "https://avatar.iran.liara.run/public/job/teacher/male",
+  },
+  duration: "8h 30m",
+  lessons: 24,
+  rating: 4.8,
 };
 
 export const curriculumSections = [
-    {
-        title: "Section 1: Getting Started with Node.js",
-        content: `
+  {
+    title: "Section 1: Getting Started with Node.js",
+    content: `
         <ul style="padding-left: 20px; line-height: 1.8;">
           <li>What is Node.js?</li>
           <li>How Node.js works under the hood</li>
@@ -93,10 +93,10 @@ export const curriculumSections = [
           <li>Your first Node.js script</li>
         </ul>
       `,
-    },
-    {
-        title: "Section 2: Core Concepts and Modules",
-        content: `
+  },
+  {
+    title: "Section 2: Core Concepts and Modules",
+    content: `
         <ul style="padding-left: 20px; line-height: 1.8;">
           <li>Understanding the Event Loop</li>
           <li>Working with Core Modules (fs, path, http)</li>
@@ -104,10 +104,10 @@ export const curriculumSections = [
           <li>Creating and exporting modules</li>
         </ul>
       `,
-    },
-    {
-        title: "Section 3: Building REST APIs with Express",
-        content: `
+  },
+  {
+    title: "Section 3: Building REST APIs with Express",
+    content: `
         <ul style="padding-left: 20px; line-height: 1.8;">
           <li>Setting up Express.js</li>
           <li>Handling routes and middleware</li>
@@ -115,10 +115,10 @@ export const curriculumSections = [
           <li>Building CRUD endpoints</li>
         </ul>
       `,
-    },
-    {
-        title: "Section 4: Authentication & Deployment",
-        content: `
+  },
+  {
+    title: "Section 4: Authentication & Deployment",
+    content: `
         <ul style="padding-left: 20px; line-height: 1.8;">
           <li>Implementing JWT authentication</li>
           <li>Environment variables and configuration</li>
@@ -126,5 +126,5 @@ export const curriculumSections = [
           <li>Deploying your app to production</li>
         </ul>
       `,
-    },
+  },
 ];

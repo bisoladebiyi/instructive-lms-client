@@ -1,11 +1,12 @@
 import Layout from "../../../components/Layout";
+import { navItems } from "../../../utils/constants/navItems";
 import Courses from "./Courses";
 import Stats from "./Stats";
 import StudentsOverview from "./StudentsOverview";
 
 const Dashboard = () => {
   return (
-    <Layout>
+    <Layout pageHeading={navItems[0].text}>
       <>
         {/* stats  */}
         <Stats />

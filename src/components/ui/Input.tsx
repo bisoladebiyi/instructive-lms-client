@@ -8,6 +8,7 @@ const Input = ({
   name,
   label,
   placeholder,
+  ...props
 }: IInput) => {
   return (
     <div className={`${className}`}>
@@ -20,6 +21,7 @@ const Input = ({
         type={type}
         name={name}
         className={`w-full mt-1 border border-gray-400 p-2 text-sm text-gray-500 rounded outline-0 ${inputClass}`}
+        {...props}
       />
     </div>
   );

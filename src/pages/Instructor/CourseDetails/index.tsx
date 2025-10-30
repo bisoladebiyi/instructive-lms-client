@@ -11,7 +11,7 @@ const CourseDetails = () => {
     { label: "Curriculum", content: <Curriculum /> },
   ];
   return (
-    <Layout page={IROUTES.COURSE}>
+    <Layout parentPage={IROUTES.COURSES}>
       <>
         <nav className="bg-gray-800 flex items-center justify-between text-white p-3 py-5 -m-8 font-extralight relative z-10 border-b border-white/50 mb-10">
           <p>Introduction to node.js - A beginner's guide</p>
