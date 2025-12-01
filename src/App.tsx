@@ -10,6 +10,7 @@ import CreateCourse from "./pages/Instructor/Courses/CreateCourse.tsx";
 import StudentsList from "./pages/Instructor/StudentsList/index.tsx";
 import AddLesson from "./pages/Instructor/Lessons/AddLesson.tsx";
 import LessonDetails from "./pages/Instructor/Lessons/LessonDetails.tsx";
+import Settings from "./pages/Instructor/Settings/index.tsx";
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
         <Route path={IROUTES.LESSON_CREATE} element={<AddLesson />} />
         <Route path={IROUTES.LESSON_EDIT} element={<AddLesson />} />
         <Route path={IROUTES.LESSON} element={<LessonDetails />} />
+        <Route path={IROUTES.SETTINGS} element={<Settings />} />
       </Routes>
     </div>
   );
