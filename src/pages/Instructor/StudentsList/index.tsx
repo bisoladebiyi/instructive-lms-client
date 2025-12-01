@@ -7,7 +7,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const StudentsList = () => {
   return (
-    <Layout parentPage={IROUTES.STUDENTS}>
+    <Layout parentPage={IROUTES.STUDENTS} pageHeading="Students">
       <>
         <div className="my-5 flex justify-between items-center">
           <div className="w-full relative">
