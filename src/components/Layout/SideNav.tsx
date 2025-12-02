@@ -1,15 +1,17 @@
-import { navItems } from "../../utils/constants/navItems";
+import { instructorNavItems, studentNavItems } from "../../utils/constants/navItems";
 import { TbLogout } from "react-icons/tb";
 import { IROUTES } from "../../utils/constants/routes";
 import { Link, useNavigate } from "react-router";
 import type { ISideNav } from "../../interfaces/Layout.interface";
 import Logo from "../ui/Logo";
 
-const Sidenav = ({ parentPage }: ISideNav) => {
+const Sidenav = ({ parentPage, userType = "instructor" }: ISideNav) => {
   const navigate = useNavigate();
+  const isStudent = userType === "student";
+  const navItems = isStudent ? studentNavItems : instructorNavItems;
 
   const logOut = () => {
-    navigate(IROUTES.LOGIN);
+    navigate(IROUTES.LOGIN + `?role=${userType}`);
   };
 
   return (
@@ -18,12 +20,19 @@ const Sidenav = ({ parentPage }: ISideNav) => {
         <div className="w-20 h-20 rounded-full ring-4 ring-primary-400/30 overflow-hidden">
           <img
             className="w-full h-full object-cover"
-            src="https://avatar.iran.liara.run/public/job/teacher/male"
+            src={isStudent
+              ? "https://avatar.iran.liara.run/public/boy"
+              : "https://avatar.iran.liara.run/public/job/teacher/male"
+            }
             alt=""
           />
         </div>
-        <p className="text-base font-semibold mt-3 text-white">Abisola Adebiyi</p>
-        <p className="text-primary-300 text-xs font-medium">Instructor</p>
+        <p className="text-base font-semibold mt-3 text-white">
+          {isStudent ? "John Doe" : "Abisola Adebiyi"}
+        </p>
+        <p className="text-primary-300 text-xs font-medium">
+          {isStudent ? "Student" : "Instructor"}
+        </p>
       </div>
 
       <ul className="flex-1 list-none space-y-1">
