@@ -3,8 +3,9 @@ interface ILogo {
 }
 const Logo = ({ className }: ILogo) => {
   return (
-    <div className={`font-mono text-blue-950 font-bold text-xl ${className}`}>
-      Instructive
+    <div className={`font-semibold text-xl tracking-tight ${className}`}>
+      <span className="text-primary-500">Instruc</span>
+      <span>tive</span>
     </div>
   );
 };

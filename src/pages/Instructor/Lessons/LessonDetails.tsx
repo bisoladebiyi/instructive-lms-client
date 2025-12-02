@@ -15,31 +15,31 @@ const LessonDetails = () => {
   return (
     <Layout parentPage={IROUTES.COURSES}>
       <>
-        <nav className="bg-gray-800 flex items-center justify-between text-white p-3 py-5 -m-8 font-extralight relative z-10 border-b border-white/50 mb-10">
-          <p>{lesson.title}</p>
+        <nav className="bg-sidebar flex items-center justify-between text-white px-6 py-4 -mx-8 -mt-8 relative z-10 mb-8 shadow-lg">
+          <p className="font-medium">{lesson.title}</p>
 
           <div>
             <Link
               to={IROUTES.COURSES + `/edit/${5}`}
-              className="underline text-xs mr-5 cursor-pointer"
+              className="text-sm text-gray-300 hover:text-white transition-colors"
             >
               Edit
             </Link>
           </div>
         </nav>
-        <div className="max-w-4xl mx-auto p-8 space-y-6">
+        <div className="max-w-4xl mx-auto space-y-6">
           {/* Lesson header */}
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-semibold text-gray-800">
+            <h1 className="text-xl font-bold text-gray-900">
               {lesson.title}
             </h1>
-            <span className="text-gray-500">{lesson.duration}</span>
+            <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{lesson.duration}</span>
           </div>
 
           {/* Lesson type content */}
-          <div className="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+          <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm">
             {lesson.type === "video" && (
-              <div className="aspect-video w-full rounded-md overflow-hidden mb-4">
+              <div className="aspect-video w-full rounded-lg overflow-hidden mb-4">
                 <iframe
                   src={lesson.videoUrl}
                   title={lesson.title}
@@ -55,7 +55,7 @@ const LessonDetails = () => {
                   href={lesson.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline"
+                  className="text-primary-600 hover:text-primary-700 font-medium"
                 >
                   Download PDF
                 </a>

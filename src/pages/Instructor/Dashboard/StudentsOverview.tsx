@@ -7,13 +7,15 @@ import { IROUTES } from "../../../utils/constants/routes";
 const StudentsOverview = () => {
   return (
     <section className="mt-10">
-      <div className="flex justify-between items-center mb-3">
-        <h2 className="font-medium text-2xl">Students Overview</h2>
-        <Link to={IROUTES.STUDENTS} className="flex items-center gap-1 underline hover:gap-2 transition-all cursor-pointer text-sm text-gray-500">
-          View all <IoIosArrowRoundForward />
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="font-semibold text-lg text-gray-900">Students Overview</h2>
+        <Link to={IROUTES.STUDENTS} className="flex items-center gap-1 text-primary-600 hover:text-primary-700 hover:gap-2 transition-all cursor-pointer text-sm font-medium">
+          View all <IoIosArrowRoundForward className="text-lg" />
         </Link>
       </div>
-      <CustomTable cols={StudentsTable.columns} rows={StudentsTable.rows} />
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <CustomTable cols={StudentsTable.columns} rows={StudentsTable.rows} />
+      </div>
     </section>
   );
 };

@@ -35,8 +35,8 @@ const Settings = () => {
 
   return (
     <Layout parentPage={IROUTES.SETTINGS} pageHeading="Settings">
-      <div className="w-full mt-5">
-        <div className="border border-gray-200 rounded-md">
+      <div className="w-full mt-6">
+        <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={activeTab}
@@ -45,15 +45,16 @@ const Settings = () => {
               sx={{
                 "& .MuiTab-root": {
                   textTransform: "none",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   fontSize: "0.875rem",
-                  paddingBottom: "0px"
+                  paddingBottom: "0px",
+                  color: "#6b7280",
                 },
                 "& .Mui-selected": {
-                  color: "#000 !important",
+                  color: "#4f46e5 !important",
                 },
                 "& .MuiTabs-indicator": {
-                  backgroundColor: "#000",
+                  backgroundColor: "#4f46e5",
                 },
               }}
             >
@@ -75,7 +76,7 @@ const Settings = () => {
                   />
                   <label
                     htmlFor={`avatar-${id}`}
-                    className="absolute bottom-0 right-0 bg-black text-white p-2 rounded-full cursor-pointer hover:bg-gray-800 transition-colors"
+                    className="absolute bottom-0 right-0 bg-primary-600 text-white p-2 rounded-full cursor-pointer hover:bg-primary-700 transition-colors shadow-md"
                   >
                     <FaCamera className="text-xs" />
                   </label>
@@ -127,7 +128,7 @@ const Settings = () => {
               />
 
               <div className="mb-4">
-                <label htmlFor={`bio-${id}`} className="text-sm">
+                <label htmlFor={`bio-${id}`} className="text-sm font-medium text-gray-700">
                   Bio
                 </label>
                 <textarea
@@ -135,7 +136,7 @@ const Settings = () => {
                   name="bio"
                   placeholder="Tell us about yourself..."
                   rows={4}
-                  className="w-full mt-1 border border-gray-400 p-2 text-sm text-gray-500 rounded outline-0 resize-none"
+                  className="w-full mt-1.5 border border-gray-300 px-3 py-2.5 text-sm text-gray-900 rounded-lg outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200 resize-none placeholder:text-gray-400"
                 />
               </div>
 

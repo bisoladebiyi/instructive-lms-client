@@ -18,7 +18,7 @@ const AddLesson = () => {
       parentPage={IROUTES.COURSES}
       pageHeading={lessonId ? "Edit Lesson" : "Add New Lesson"}
     >
-      <form className="w-full border border-gray-200 rounded-MD p-8 bg-white mt-5">
+      <form className="w-full bg-white border border-gray-100 rounded-xl p-8 shadow-sm mt-6">
         {/* Lesson title */}
         <div className="flex gap-4">
           <Input
@@ -40,16 +40,16 @@ const AddLesson = () => {
         </div>
 
         {/* Content type selector */}
-        <div className="mb-4">
-          <label className="text-sm">Lesson Type</label>
-          <div className="flex gap-4 mt-1">
+        <div className="mb-6">
+          <label className="text-sm font-medium text-gray-700">Lesson Type</label>
+          <div className="flex gap-3 mt-2">
             {["video", "pdf", "text"].map((type) => (
               <label
                 key={type}
-                className={`cursor-pointer px-3 py-1 text-sm rounded-md border ${
+                className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${
                   contentType === type
-                    ? "bg-black text-white "
-                    : "bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100"
+                    ? "bg-primary-600 text-white border-primary-600 shadow-sm"
+                    : "bg-white text-gray-700 border-gray-300 hover:border-primary-300 hover:bg-primary-50"
                 }`}
               >
                 <input
@@ -99,13 +99,13 @@ const AddLesson = () => {
           />
         )}
 
-        <div className="flex justify-end items-center mt-4">
+        <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-100">
           {lessonId && (
-            <button className="text-red-400 text-sm font-light uppercase underline mr-4 cursor-pointer">
+            <button className="text-red-500 hover:text-red-600 text-sm font-medium mr-6 cursor-pointer transition-colors">
               Delete lesson
             </button>
           )}
-          <Button text={lessonId ? "Update" : "Add"} />
+          <Button text={lessonId ? "Update Lesson" : "Add Lesson"} />
         </div>
       </form>
     </Layout>
