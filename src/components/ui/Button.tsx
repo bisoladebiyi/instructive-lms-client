@@ -5,7 +5,7 @@ const Button = ({ className, text, onClick, type = "button" }: IButton) => {
     <button
       onClick={onClick}
       type={type}
-      className={`bg-black text-white p-3 rounded font-light text-sm uppercase cursor-pointer ${className}`}
+      className={`bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white px-5 py-2.5 rounded-lg font-medium text-sm cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md ${className}`}
     >
       {text}
     </button>

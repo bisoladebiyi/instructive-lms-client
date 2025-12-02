@@ -15,25 +15,28 @@ const ReusableAccordion = ({ items }: IReusableAccordion) => {
           defaultExpanded={item.defaultExpanded}
           sx={{
             mb: 2,
-            borderRadius: 2,
-            boxShadow: "0px 1px 4px rgba(0,0,0,0.1)",
-            "&:before": { display: "none" }, // Remove default divider
-            transition: "all 0.3s",
+            borderRadius: "12px !important",
+            border: "1px solid #f3f4f6",
+            boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+            "&:before": { display: "none" },
+            transition: "all 0.2s",
             "&:hover": {
-              boxShadow: "0px 2px 8px rgba(0,0,0,0.15)",
+              boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
             },
+            overflow: "hidden",
           }}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon sx={{ color: "#6b7280" }} />}
             aria-controls={`panel${index}-content`}
             id={`panel${index}-header`}
             sx={{
-              bgcolor: "grey.50",
-              borderRadius: 2,
+              bgcolor: "#fafafa",
               px: 3,
-              py: 2,
-              "& .MuiTypography-root": { fontWeight: 500, fontSize: "1rem" },
+              py: 1,
+              minHeight: 56,
+              "& .MuiAccordionSummary-content": { my: 1.5 },
+              "& .MuiTypography-root": { fontWeight: 600, fontSize: "0.875rem", color: "#111827" },
             }}
           >
             <Typography component="span">{item.title}</Typography>
@@ -42,16 +45,16 @@ const ReusableAccordion = ({ items }: IReusableAccordion) => {
           <AccordionDetails
             sx={{
               px: 3,
-              py: 2,
-              borderTop: "1px solid rgba(0,0,0,0.05)",
-              bgcolor: "background.paper",
+              py: 2.5,
+              borderTop: "1px solid #f3f4f6",
+              bgcolor: "white",
             }}
           >
             {item.content}
           </AccordionDetails>
 
           {item.actions && (
-            <AccordionActions sx={{ px: 3, pb: 2 }}>
+            <AccordionActions sx={{ px: 3, pb: 2, borderTop: "1px solid #f3f4f6" }}>
               {item.actions}
             </AccordionActions>
           )}

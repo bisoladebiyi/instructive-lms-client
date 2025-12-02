@@ -37,7 +37,7 @@ const CreateCourse = () => {
       <div className="w-full">
         <form
           action=""
-          className="w-full mt-5 border border-gray-200 rounded-md p-8"
+          className="w-full mt-6 bg-white border border-gray-100 rounded-xl p-8 shadow-sm"
         >
           <div className="flex gap-4">
             <Input
@@ -62,8 +62,8 @@ const CreateCourse = () => {
             name="desc"
             className="mb-3"
           />
-          <div className="mt-6">
-            <label className="block font-medium mb-2">
+          <div className="mt-8">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Course Sections{" "}
               <Tooltip title="You can add lessons to each section on the course details page.">
                 <IconButton>
@@ -105,13 +105,13 @@ const CreateCourse = () => {
               </div>
             ))}
           </div>
-          <div className="flex justify-end items-center mt-4">
+          <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-100">
             {courseId && (
-              <button className="text-red-400 text-sm font-light uppercase underline mr-4 cursor-pointer">
+              <button className="text-red-500 hover:text-red-600 text-sm font-medium mr-6 cursor-pointer transition-colors">
                 Delete course
               </button>
             )}
-            <Button text={courseId ? "Update" : "Create"} />
+            <Button text={courseId ? "Update Course" : "Create Course"} />
           </div>
         </form>
       </div>

@@ -14,43 +14,47 @@ const Login = () => {
     navigate(IROUTES.DASHBOARD);
   };
   return (
-    <div className="h-full bg-gray-50 flex flex-col items-center justify-center relative">
-      <Logo className="fixed top-3 left-3" />
+    <div className="min-h-full bg-linear-to-br from-primary-50 via-white to-gray-50 flex flex-col items-center justify-center relative py-12">
+      <Logo className="fixed top-6 left-6" />
       <Link
         to={IROUTES.LOGIN + "?role=student"}
-        className="absolute top-3 right-3 flex items-center gap-1 text-gray-500 underline tex-sm hover:text-gray-600"
+        className="absolute top-6 right-6 flex items-center gap-1.5 text-gray-600 text-sm font-medium hover:text-primary-600 transition-colors"
       >
-        📚 Login as a student! <HiOutlineExternalLink />
+        Login as a student <HiOutlineExternalLink />
       </Link>
-      <form action="">
-        <h1 className="font-medium text-xl mb-2">Log in</h1>
-        <p className="text-gray-700 text-sm mb-5">Inspire. Teach. Transform.</p>
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <div className="text-center mb-8">
+            <h1 className="font-bold text-2xl text-gray-900 mb-2">Welcome back</h1>
+            <p className="text-gray-500 text-sm">Sign in to continue to your dashboard</p>
+          </div>
 
-        <Input
-          label="Email"
-          type="email"
-          id={`email-${id}`}
-          name="email"
-          className="mb-3"
-        />
-        <Input
-          label="Password"
-          type="password"
-          id={`password-${id}`}
-          name="password"
-          className="mb-3"
-        />
-        <Button onClick={onLogIn} text="Log in" className="w-full" />
-      </form>
-      <p className="text-sm mt-4">
-        Don't have an account?{" "}
-        <Link
-          className="text-blue-400"
-          to={IROUTES.SIGNUP + "?role=instructor"}
-        >
-          Sign up
-        </Link>
-      </p>
+          <form action="" className="space-y-4">
+            <Input
+              label="Email"
+              type="email"
+              id={`email-${id}`}
+              name="email"
+            />
+            <Input
+              label="Password"
+              type="password"
+              id={`password-${id}`}
+              name="password"
+            />
+            <Button onClick={onLogIn} text="Sign In" className="w-full mt-6" />
+          </form>
+        </div>
+        <p className="text-sm text-center mt-6 text-gray-600">
+          Don't have an account?{" "}
+          <Link
+            className="text-primary-600 hover:text-primary-700 font-medium"
+            to={IROUTES.SIGNUP + "?role=instructor"}
+          >
+            Create account
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

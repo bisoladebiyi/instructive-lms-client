@@ -6,15 +6,15 @@ import { IROUTES } from "../../../utils/constants/routes";
 const Courses = () => {
   return (
     <section className="mt-10">
-      <div className="flex justify-between items-center">
-        <h2 className="font-medium text-2xl">Recently Published</h2>
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="font-semibold text-lg text-gray-900">Recently Published</h2>
         <Link to={IROUTES.COURSES}>
-          <p className="flex items-center gap-1 underline hover:gap-2 transition-all cursor-pointer text-sm text-gray-500">
-            View all <IoIosArrowRoundForward />
+          <p className="flex items-center gap-1 text-primary-600 hover:text-primary-700 hover:gap-2 transition-all cursor-pointer text-sm font-medium">
+            View all <IoIosArrowRoundForward className="text-lg" />
           </p>
         </Link>
       </div>
-      <div className="grid grid-cols-4 mt-3 gap-4">
+      <div className="grid grid-cols-4 gap-5">
         {/* course cards  */}
         {Array(4)
           .fill(3)

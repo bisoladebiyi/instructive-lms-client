@@ -3,37 +3,60 @@ import { IoPeople } from "react-icons/io5";
 import { IoIosStar } from "react-icons/io";
 import { FaFileCircleCheck } from "react-icons/fa6";
 
+const stats = [
+  {
+    label: "Courses",
+    value: "40",
+    icon: FaFileLines,
+    bgColor: "bg-primary-50",
+    iconBg: "bg-primary-100",
+    iconColor: "text-primary-600",
+  },
+  {
+    label: "Published",
+    value: "40",
+    icon: FaFileCircleCheck,
+    bgColor: "bg-emerald-50",
+    iconBg: "bg-emerald-100",
+    iconColor: "text-emerald-600",
+  },
+  {
+    label: "Students",
+    value: "95",
+    icon: IoPeople,
+    bgColor: "bg-amber-50",
+    iconBg: "bg-amber-100",
+    iconColor: "text-amber-600",
+  },
+  {
+    label: "Avg. Rating",
+    value: "4.8",
+    icon: IoIosStar,
+    bgColor: "bg-rose-50",
+    iconBg: "bg-rose-100",
+    iconColor: "text-rose-600",
+  },
+];
+
 const Stats = () => {
   return (
-    <section className="w-full mt-4 flex gap-4">
-      <div className="bg-gray-200/50 rounded p-3 w-1/5">
-        <h2 className="text-3xl font-semibold">40</h2>
-        <p className="text-sm text-gray-800">Courses</p>
-        <div className="flex justify-end -mt-2">
-          <FaFileLines className="text-xl text-gray-600" />
+    <section className="w-full mt-6 grid grid-cols-4 gap-5">
+      {stats.map((stat) => (
+        <div
+          key={stat.label}
+          className={`${stat.bgColor} rounded-xl p-5 transition-all duration-200 hover:shadow-md`}
+        >
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 mb-1">{stat.label}</p>
+              <h2 className="text-3xl font-bold text-gray-900">{stat.value}</h2>
+            </div>
+            <div className={`${stat.iconBg} p-3 rounded-lg`}>
+              <stat.icon className={`text-xl ${stat.iconColor}`} />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="bg-gray-200/50 rounded p-3 w-1/5">
-        <h2 className="text-3xl font-semibold">40</h2>
-        <p className="text-sm text-gray-800">Courses published</p>
-        <div className="flex justify-end -mt-2">
-          <FaFileCircleCheck className="text-xl text-gray-600" />
-        </div>
-      </div>
-      <div className="bg-gray-200/50 rounded p-3 w-1/5">
-        <h2 className="text-3xl font-semibold">95</h2>
-        <p className="text-sm text-gray-800">Total students</p>
-        <div className="flex justify-end -mt-2">
-          <IoPeople className="text-xl text-gray-600" />
-        </div>
-      </div>
-      <div className="bg-gray-200/50 rounded p-3 w-1/5">
-        <h2 className="text-3xl font-semibold">4.8</h2>
-        <p className="text-sm text-gray-800">Average rating</p>
-        <div className="flex justify-end -mt-2">
-          <IoIosStar className="text-xl text-gray-600" />
-        </div>
-      </div>
+      ))}
     </section>
   );
 };

@@ -9,24 +9,25 @@ const Courses = () => {
     <Layout parentPage={IROUTES.COURSES} pageHeading={"Courses"}>
       <>
         {/* search and filter  */}
-        <div className="my-5 flex justify-between items-center">
-          <div className="w-full relative">
+        <div className="my-6 flex justify-between items-center">
+          <div className="relative">
             <input
               type="search"
               name=""
               id=""
-              placeholder="Search..."
-              className="bg-gray-100 py-2 px-4 pl-7 text-xs w-1/4 rounded outline-0 border border-gray-200 text-gray-500"
+              placeholder="Search courses..."
+              className="bg-white py-2.5 px-4 pl-10 text-sm w-80 rounded-lg border border-gray-200 text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
             />
-            <IoIosSearch className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500" />
+            <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           </div>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Show</InputLabel>
+          <FormControl variant="standard" sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label" sx={{ fontSize: '0.875rem' }}>Show</InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
               defaultValue={10}
               label="Filter by"
+              sx={{ fontSize: '0.875rem' }}
             >
               <MenuItem value={10}>All</MenuItem>
               <MenuItem value={20}>Public</MenuItem>
@@ -34,7 +35,7 @@ const Courses = () => {
             </Select>
           </FormControl>
         </div>
-        <div className="grid grid-cols-4 mt-3 gap-4">
+        <div className="grid grid-cols-4 gap-5">
           {/* course cards  */}
           {Array(10)
             .fill(3)

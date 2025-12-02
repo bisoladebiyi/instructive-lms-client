@@ -13,17 +13,17 @@ const CourseDetails = () => {
   return (
     <Layout parentPage={IROUTES.COURSES}>
       <>
-        <nav className="bg-gray-800 flex items-center justify-between text-white p-3 py-5 -m-8 font-extralight relative z-10 border-b border-white/50 mb-10">
-          <p>Introduction to node.js - A beginner's guide</p>
+        <nav className="bg-sidebar flex items-center justify-between text-white px-6 py-4 -mx-8 -mt-8 relative z-10 mb-8 shadow-lg">
+          <p className="font-medium">Introduction to node.js - A beginner's guide</p>
 
-          <div>
+          <div className="flex items-center gap-4">
             <Link
               to={IROUTES.COURSES + `/edit/${5}`}
-              className="underline text-xs mr-5 cursor-pointer"
+              className="text-sm text-gray-300 hover:text-white transition-colors"
             >
               Edit
             </Link>
-            <button className="bg-cyan-600 p-3 rounded text-xs cursor-pointer">
+            <button className="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200">
               Publish
             </button>
           </div>

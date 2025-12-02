@@ -9,9 +9,9 @@ const Layout = ({
   pageHeading,
 }: ILayout) => {
   return (
-    <div className="h-full flex">
+    <div className="h-full flex bg-gray-50">
       <SideNav parentPage={parentPage} />
-      <div className="p-7 w-full h-full overflow-auto">
+      <div className="px-8 py-6 w-full h-full overflow-auto">
         <TopNav text={pageHeading} />
         <main className="h-full">{children}</main>
       </div>

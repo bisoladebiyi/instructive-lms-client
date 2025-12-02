@@ -13,38 +13,46 @@ const Sidenav = ({ parentPage }: ISideNav) => {
   };
 
   return (
-    <aside className="w-1/6 bg-gray-800 text-white p-3 relative">
-      <div className="text-center text-sm flex flex-col justify-center items-center w-full mt-3">
-        <img
-          className="w-20 h-20"
-          src="https://avatar.iran.liara.run/public/job/teacher/male"
-          alt=""
-        />
-        <p className="text-lg font-normal mt-1">Abisola Adebiyi</p>
-        <p className="font-extralight text-gray-300 text-xs">Instructor</p>
+    <aside className="w-64 min-w-64 bg-sidebar text-white p-5 relative flex flex-col">
+      <div className="text-center flex flex-col justify-center items-center w-full mt-2 mb-8">
+        <div className="w-20 h-20 rounded-full ring-4 ring-primary-400/30 overflow-hidden">
+          <img
+            className="w-full h-full object-cover"
+            src="https://avatar.iran.liara.run/public/job/teacher/male"
+            alt=""
+          />
+        </div>
+        <p className="text-base font-semibold mt-3 text-white">Abisola Adebiyi</p>
+        <p className="text-primary-300 text-xs font-medium">Instructor</p>
       </div>
 
-      <ul className="mt-5 list-none">
+      <ul className="flex-1 list-none space-y-1">
         {navItems.map((item) => (
           <Link to={item.link} key={item.text}>
             <li
-              className={`flex gap-2 p-3 text-sm font-light items-center hover:bg-gray-50/10 ${
-                parentPage === item.link ? "bg-gray-50/10" : ""
-              } rounded mb-3 cursor-pointer transition-colors`}
+              className={`flex gap-3 px-4 py-3 text-sm font-medium items-center rounded-lg cursor-pointer transition-all duration-200 ${
+                parentPage === item.link
+                  ? "bg-sidebar-active text-white shadow-lg shadow-primary-900/20"
+                  : "text-gray-300 hover:bg-sidebar-hover hover:text-white"
+              }`}
             >
-              <item.icon className="text-xl" />
+              <item.icon className="text-lg" />
               <span>{item.text}</span>
             </li>
           </Link>
         ))}
       </ul>
-      <Logo className="text-white absolute bottom-5 left-5 text-[13px]" />
-      <button
-        onClick={logOut}
-        className="cursor-pointer absolute right-5 bottom-5 hover:scale-105"
-      >
-        <TbLogout className="text-xl" />
-      </button>
+
+      <div className="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
+        <Logo className="text-white/70 text-xs" />
+        <button
+          onClick={logOut}
+          className="cursor-pointer p-2 rounded-lg text-gray-400 hover:text-white hover:bg-sidebar-hover transition-all duration-200"
+          title="Logout"
+        >
+          <TbLogout className="text-xl" />
+        </button>
+      </div>
     </aside>
   );
 };
