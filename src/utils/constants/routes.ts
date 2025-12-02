@@ -1,6 +1,7 @@
 export const IROUTES = {
     SIGNUP: "/signup",
     LOGIN: "/login",
+    // Instructor Pages
     DASHBOARD: "/instructor/dashboard",
     COURSES: "/instructor/courses",
     COURSE: "/instructor/courses/:courseId",
@@ -11,5 +12,7 @@ export const IROUTES = {
     LESSON_CREATE: "/instructor/courses/:courseId/lessons/create",
     LESSON_EDIT: "/instructor/courses/:courseId/lessons/edit/:lessonId",
     STUDENTS: "/instructor/students",
-    SETTINGS: "/instructor/settings"
+    SETTINGS: "/instructor/settings",
+    // Student Pages
+    STUDENT_DASHBOARD: "/student/dashboard",
 };
