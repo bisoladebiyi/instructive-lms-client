@@ -2,27 +2,20 @@ import { useParams, Link, useNavigate } from "react-router";
 import Layout from "../../../components/Layout";
 import Button from "../../../components/ui/Button";
 import { IROUTES } from "../../../utils/constants/routes";
-import { FaPlay, FaChevronLeft, FaList, FaPen } from "react-icons/fa6";
+import { FaCheck, FaPlay, FaChevronLeft, FaList } from "react-icons/fa6";
 import { FaFilePdf } from "react-icons/fa";
-
-interface IInstructorLesson {
-  id: string;
-  title: string;
-  duration: string;
-  type: "video" | "text" | "pdf";
-  videoUrl?: string;
-  textContent?: string;
-  pdfUrl?: string;
-}
+import { LinearProgress } from "@mui/material";
+import type { ILesson } from "../../../interfaces/Lesson.interface";
 
 // Dummy data
-const lessonsData: Record<string, IInstructorLesson> = {
+const lessonsData: Record<string, ILesson> = {
   "1": {
     id: "1",
     title: "What is Node.js?",
     duration: "12:30",
     type: "video",
     videoUrl: "https://www.youtube.com/embed/TlB_eWDSMt4",
+    isCompleted: true,
   },
   "2": {
     id: "2",
@@ -56,6 +49,7 @@ fs.readFile('file.txt', 'utf8', (err, data) => {
 
 console.log('This runs before file is read!');</code></pre>
     `,
+    isCompleted: true,
   },
   "3": {
     id: "3",
@@ -63,6 +57,7 @@ console.log('This runs before file is read!');</code></pre>
     duration: "10:20",
     type: "pdf",
     pdfUrl: "https://nodejs.org/dist/latest/docs/api/all.pdf",
+    isCompleted: false,
   },
   "4": {
     id: "4",
@@ -70,6 +65,7 @@ console.log('This runs before file is read!');</code></pre>
     duration: "15:00",
     type: "video",
     videoUrl: "https://www.youtube.com/embed/TlB_eWDSMt4",
+    isCompleted: false,
   },
   "5": {
     id: "5",
@@ -77,59 +73,64 @@ console.log('This runs before file is read!');</code></pre>
     duration: "22:15",
     type: "video",
     videoUrl: "https://www.youtube.com/embed/8aGhZQkoFbQ",
+    isCompleted: false,
   },
 };
 
-// Dummy course sections
+// Dummy course sections with lessons for sidebar
 const courseSections = [
   {
     title: "Section 1: Getting Started",
     lessons: [
-      { id: "1", title: "What is Node.js?", duration: "12:30" },
-      { id: "2", title: "How Node.js works under the hood", duration: "18:45" },
-      { id: "3", title: "Installing Node and npm", duration: "10:20" },
-      { id: "4", title: "Your first Node.js script", duration: "15:00" },
+      { id: "1", title: "What is Node.js?", duration: "12:30", isCompleted: true },
+      { id: "2", title: "How Node.js works under the hood", duration: "18:45", isCompleted: true },
+      { id: "3", title: "Installing Node and npm", duration: "10:20", isCompleted: false },
+      { id: "4", title: "Your first Node.js script", duration: "15:00", isCompleted: false },
     ],
   },
   {
     title: "Section 2: Core Concepts",
     lessons: [
-      { id: "5", title: "Understanding the Event Loop", duration: "22:15" },
-      { id: "6", title: "Working with Core Modules", duration: "25:30" },
-      { id: "7", title: "Using npm and dependencies", duration: "14:00" },
-      { id: "8", title: "Creating and exporting modules", duration: "16:45" },
+      { id: "5", title: "Understanding the Event Loop", duration: "22:15", isCompleted: false },
+      { id: "6", title: "Working with Core Modules", duration: "25:30", isCompleted: false },
+      { id: "7", title: "Using npm and dependencies", duration: "14:00", isCompleted: false },
+      { id: "8", title: "Creating and exporting modules", duration: "16:45", isCompleted: false },
     ],
   },
 ];
 
 const allLessonIds = courseSections.flatMap((s) => s.lessons.map((l) => l.id));
 
-const InstructorLessonDetails = () => {
+const StudentLesson = () => {
   const { courseId, lessonId } = useParams();
   const navigate = useNavigate();
   const lesson = lessonsData[lessonId || "1"];
 
   const totalLessons = allLessonIds.length;
+  const completedLessons = courseSections.reduce(
+    (acc, section) => acc + section.lessons.filter((l) => l.isCompleted).length,
+    0
+  );
+  const progressPercent = Math.round((completedLessons / totalLessons) * 100);
+
   const currentIndex = allLessonIds.indexOf(lessonId || "1");
   const prevLessonId = currentIndex > 0 ? allLessonIds[currentIndex - 1] : null;
-  const nextLessonId =
-    currentIndex < allLessonIds.length - 1
-      ? allLessonIds[currentIndex + 1]
-      : null;
+  const nextLessonId = currentIndex < allLessonIds.length - 1 ? allLessonIds[currentIndex + 1] : null;
 
   const navigateToLesson = (id: string) => {
-    navigate(`/instructor/courses/${courseId}/lessons/${id}`);
+    navigate(`/student/courses/${courseId}/lessons/${id}`);
+  };
+
+  const handleMarkComplete = () => {
+    console.log("Marking lesson as complete:", lessonId);
   };
 
   if (!lesson) {
     return (
-      <Layout parentPage={IROUTES.COURSES}>
+      <Layout parentPage={IROUTES.STUDENT_COURSES} userType="student">
         <div className="text-center py-12">
           <p className="text-gray-500">Lesson not found</p>
-          <Link
-            to={`/instructor/courses/${courseId}`}
-            className="text-primary-600 hover:underline mt-4 inline-block"
-          >
+          <Link to={`/student/courses/${courseId}`} className="text-primary-600 hover:underline mt-4 inline-block">
             Back to course
           </Link>
         </div>
@@ -138,7 +139,7 @@ const InstructorLessonDetails = () => {
   }
 
   return (
-    <Layout parentPage={IROUTES.COURSES}>
+    <Layout parentPage={IROUTES.STUDENT_COURSES} userType="student">
       <div className="flex gap-6 -mt-2">
         {/* Main Content */}
         <div className="flex-1">
@@ -146,33 +147,15 @@ const InstructorLessonDetails = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Link
-                to={`/instructor/courses/${courseId}`}
+                to={`/student/courses/${courseId}`}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
               >
                 <FaChevronLeft />
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">
-                {lesson.title}
-              </h1>
+              <h1 className="text-xl font-bold text-gray-900">{lesson.title}</h1>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                {lesson.duration}
-              </span>
-              <Link
-                to={`/instructor/courses/${courseId}/lessons/edit/${lessonId}`}
-              >
-                <button className="flex items-center gap-2 text-sm text-primary-600 hover:text-primary-700 font-medium cursor-pointer">
-                  <FaPen className="text-xs" /> Edit
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Preview Badge */}
-          <div className="mb-4">
-            <span className="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-medium">
-              Preview Mode
+            <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+              {lesson.duration}
             </span>
           </div>
 
@@ -214,12 +197,9 @@ const InstructorLessonDetails = () => {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full mb-4">
                   <FaFilePdf className="text-red-500 text-3xl" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  PDF Document
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">PDF Document</h3>
                 <p className="text-gray-500 text-sm mb-6">
-                  This lesson contains a PDF document. Click below to view or
-                  download.
+                  This lesson contains a PDF document. Click below to view or download.
                 </p>
                 <div className="flex gap-3 justify-center">
                   <a
@@ -256,6 +236,13 @@ const InstructorLessonDetails = () => {
             </div>
 
             <div className="flex gap-3">
+              {!lesson.isCompleted && (
+                <Button
+                  text="Mark as Complete"
+                  onClick={handleMarkComplete}
+                  className="bg-green-600 hover:bg-green-700"
+                />
+              )}
               {nextLessonId && (
                 <Button
                   text="Next Lesson"
@@ -266,22 +253,32 @@ const InstructorLessonDetails = () => {
           </div>
         </div>
 
-        {/* Course Content Sidebar */}
+        {/* Course Content */}
         <div className="w-80 shrink-0">
           <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden sticky top-6">
-            {/* Header */}
+            {/* Progress Header */}
             <div className="p-4 border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <FaList className="text-gray-500" />
-                  <span className="font-semibold text-gray-900 text-sm">
-                    Course Content
-                  </span>
-                </div>
-                <span className="text-xs text-gray-500">
-                  {totalLessons} lessons
-                </span>
+              <div className="flex items-center gap-2 mb-2">
+                <FaList className="text-gray-500" />
+                <span className="font-semibold text-gray-900 text-sm">Course Content</span>
               </div>
+              <div className="flex justify-between text-xs text-gray-500 mb-1">
+                <span>{completedLessons} of {totalLessons} lessons</span>
+                <span>{progressPercent}%</span>
+              </div>
+              <LinearProgress
+                variant="determinate"
+                value={progressPercent}
+                sx={{
+                  height: 6,
+                  borderRadius: 3,
+                  backgroundColor: "#e5e7eb",
+                  "& .MuiLinearProgress-bar": {
+                    backgroundColor: progressPercent === 100 ? "#10b981" : "#4f46e5",
+                    borderRadius: 3,
+                  },
+                }}
+              />
             </div>
 
             <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
@@ -297,38 +294,30 @@ const InstructorLessonDetails = () => {
                         <li key={sectionLesson.id}>
                           <button
                             onClick={() => navigateToLesson(sectionLesson.id)}
-                            className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors cursor-pointer ${
+                            className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                               isActive
                                 ? "bg-primary-50 border-l-2 border-primary-600"
                                 : "hover:bg-gray-50"
                             }`}
                           >
-                            <div
-                              className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
+                            {sectionLesson.isCompleted ? (
+                              <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                                <FaCheck className="text-green-600 text-xs" />
+                              </div>
+                            ) : (
+                              <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
                                 isActive ? "bg-primary-100" : "bg-gray-100"
-                              }`}
-                            >
-                              <FaPlay
-                                className={`text-xs ${
-                                  isActive
-                                    ? "text-primary-600"
-                                    : "text-gray-400"
-                                }`}
-                              />
-                            </div>
+                              }`}>
+                                <FaPlay className={`text-xs ${isActive ? "text-primary-600" : "text-gray-400"}`} />
+                              </div>
+                            )}
                             <div className="flex-1 min-w-0">
-                              <p
-                                className={`text-sm truncate ${
-                                  isActive
-                                    ? "text-primary-700 font-medium"
-                                    : "text-gray-700"
-                                }`}
-                              >
+                              <p className={`text-sm truncate ${
+                                isActive ? "text-primary-700 font-medium" : "text-gray-700"
+                              }`}>
                                 {sectionLesson.title}
                               </p>
-                              <p className="text-xs text-gray-400">
-                                {sectionLesson.duration}
-                              </p>
+                              <p className="text-xs text-gray-400">{sectionLesson.duration}</p>
                             </div>
                           </button>
                         </li>
@@ -345,4 +334,4 @@ const InstructorLessonDetails = () => {
   );
 };
 
-export default InstructorLessonDetails;
+export default StudentLesson;

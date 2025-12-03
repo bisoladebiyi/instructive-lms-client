@@ -1,10 +1,86 @@
+import { useState } from "react";
 import CourseCard from "../../../components/ui/CourseCard";
+import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
 import Layout from "../../../components/Layout";
+import SelectFilter from "../../../components/ui/SelectFilter";
 import { IROUTES } from "../../../utils/constants/routes";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { IoIosSearch } from "react-icons/io";
 
+const visibilityOptions = ["All", "Public", "Private"];
+
+const instructorCourses: ICourseCardData[] = [
+  {
+    id: 1,
+    title: "Introduction to Node.js - A Beginner's Guide",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.5,
+    ratingCount: 300,
+    isPrivate: true,
+    bannerImg: "https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75",
+  },
+  {
+    id: 2,
+    title: "Advanced React Patterns",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.8,
+    ratingCount: 450,
+    isPrivate: false,
+    bannerImg: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+  },
+  {
+    id: 3,
+    title: "TypeScript Masterclass",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.7,
+    ratingCount: 280,
+    isPrivate: true,
+    bannerImg: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800",
+  },
+  {
+    id: 4,
+    title: "Building REST APIs with Express",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.6,
+    ratingCount: 520,
+    isPrivate: false,
+    bannerImg: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800",
+  },
+  {
+    id: 5,
+    title: "MongoDB for Beginners",
+    instructor: "Abisola Adebiyi",
+    category: "Data Science",
+    rating: 4.4,
+    ratingCount: 190,
+    isPrivate: false,
+    bannerImg: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+  },
+  {
+    id: 6,
+    title: "GraphQL Fundamentals",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.9,
+    ratingCount: 340,
+    isPrivate: true,
+    bannerImg: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
+  },
+];
+
 const Courses = () => {
+  const [visibilityFilter, setVisibilityFilter] = useState("All");
+
+  const filteredCourses = instructorCourses.filter((course) => {
+    if (visibilityFilter === "All") return true;
+    if (visibilityFilter === "Private") return course.isPrivate;
+    if (visibilityFilter === "Public") return !course.isPrivate;
+    return true;
+  });
+
   return (
     <Layout parentPage={IROUTES.COURSES} pageHeading={"Courses"}>
       <>
@@ -20,37 +96,23 @@ const Courses = () => {
             />
             <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           </div>
-          <FormControl variant="standard" sx={{ minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label" sx={{ fontSize: '0.875rem' }}>Show</InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={10}
-              label="Filter by"
-              sx={{ fontSize: '0.875rem' }}
-            >
-              <MenuItem value={10}>All</MenuItem>
-              <MenuItem value={20}>Public</MenuItem>
-              <MenuItem value={30}>Private</MenuItem>
-            </Select>
-          </FormControl>
+          <SelectFilter
+            label="Show"
+            value={visibilityFilter}
+            options={visibilityOptions}
+            onChange={setVisibilityFilter}
+            minWidth={120}
+          />
         </div>
         <div className="grid grid-cols-4 gap-5">
           {/* course cards  */}
-          {Array(10)
-            .fill(3)
-            .map((_, i) => (
-              <CourseCard
-                key={i}
-                id={i}
-                author="Abisola Adebiyi"
-                title="Introduction to node.js - A beginner's guide"
-                rating={4.5}
-                raters={300}
-                isPrivate
-                bannerImg="https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75"
-              />
-            ))}
+          {filteredCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              variant="instructor"
+            />
+          ))}
         </div>
       </>
     </Layout>

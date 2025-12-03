@@ -14,6 +14,10 @@ import LessonDetails from "./pages/Instructor/Lessons/LessonDetails.tsx";
 import Settings from "./pages/Instructor/Settings/index.tsx";
 // Student Pages
 import StudentDashboard from "./pages/Student/Dashboard/index.tsx";
+import StudentCourses from "./pages/Student/Courses/index.tsx";
+import StudentCourseDetails from "./pages/Student/CourseDetails/index.tsx";
+import StudentLesson from "./pages/Student/Lesson/index.tsx";
+import ExploreCourses from "./pages/Student/ExploreCourses/index.tsx";
 
 function App() {
   const location = useLocation();
@@ -44,6 +48,10 @@ function App() {
         <Route path={IROUTES.SETTINGS} element={<Settings />} />
         {/* Student Routes */}
         <Route path={IROUTES.STUDENT_DASHBOARD} element={<StudentDashboard />} />
+        <Route path={IROUTES.STUDENT_COURSES} element={<StudentCourses />} />
+        <Route path={IROUTES.STUDENT_COURSE} element={<StudentCourseDetails />} />
+        <Route path={IROUTES.STUDENT_LESSON} element={<StudentLesson />} />
+        <Route path={IROUTES.STUDENT_FIND_COURSES} element={<ExploreCourses />} />
       </Routes>
     </div>
   );

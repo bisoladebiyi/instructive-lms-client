@@ -16,6 +16,8 @@ export const IROUTES = {
     // Student Pages
     STUDENT_DASHBOARD: "/student/dashboard",
     STUDENT_COURSES: "/student/courses",
+    STUDENT_COURSE: "/student/courses/:courseId",
+    STUDENT_LESSON: "/student/courses/:courseId/lessons/:lessonId",
     STUDENT_FIND_COURSES: "/student/explore",
     STUDENT_SETTINGS: "/student/settings",
 };

@@ -3,18 +3,29 @@ import { IROUTES } from "../../../utils/constants/routes";
 import Layout from "../../../components/Layout";
 import Input from "../../../components/ui/Input";
 import Wysiwyg from "../../../components/ui/Wysiwyg";
+import SelectFilter from "../../../components/ui/SelectFilter";
 import { IconButton, Tooltip } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-// import CourseDetails from "../CourseDetails";
 import { MdInfo } from "react-icons/md";
 import Button from "../../../components/ui/Button";
 import { useParams } from "react-router";
+
+const categories = [
+  "Development",
+  "Design",
+  "Data Science",
+  "Business",
+  "Marketing",
+  "Other",
+];
 
 const CreateCourse = () => {
   const { courseId } = useParams();
   const id = useId();
   const [sections, setSections] = useState<string[]>([""]);
+  const [category, setCategory] = useState("Development");
+  const [learningPoints, setLearningPoints] = useState<string[]>([""]);
 
   const handleAddSection = () => {
     setSections((prev) => [...prev, ""]);
@@ -29,6 +40,21 @@ const CreateCourse = () => {
       prev.map((section, i) => (i === index ? value : section))
     );
   };
+
+  const handleAddLearningPoint = () => {
+    setLearningPoints((prev) => [...prev, ""]);
+  };
+
+  const handleRemoveLearningPoint = (index: number) => {
+    setLearningPoints((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleLearningPointChange = (index: number, value: string) => {
+    setLearningPoints((prev) =>
+      prev.map((point, i) => (i === index ? value : point))
+    );
+  };
+
   return (
     <Layout
       parentPage={courseId ? IROUTES.COURSE_EDIT : IROUTES.COURSE_CREATE}
@@ -39,34 +65,106 @@ const CreateCourse = () => {
           action=""
           className="w-full mt-6 bg-white border border-gray-100 rounded-xl p-8 shadow-sm"
         >
-          <div className="flex gap-4">
+          <h3 className="text-base font-semibold text-gray-900 mb-4">
+            Basic Information
+          </h3>
+          <div className="flex gap-4 mb-4">
             <Input
-              label="Title"
+              label="Course Title"
               type="text"
               id={`title-${id}`}
               name="title"
-              className="mb-3 w-1/2"
+              placeholder="e.g. Introduction to Node.js"
+              className="w-1/2"
+            />
+            <div className="w-1/2">
+              <label className="text-sm font-medium text-gray-700 block mb-1.5">
+                Category
+              </label>
+              <SelectFilter
+                label="Select category"
+                value={category}
+                options={categories}
+                onChange={setCategory}
+                fullWidth
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-4 mb-4">
+            <Input
+              label="Duration (e.g. 8h 30m)"
+              type="text"
+              id={`duration-${id}`}
+              name="duration"
+              placeholder="e.g. 8h 30m"
+              className="w-1/2"
             />
             <Input
               label="Banner Image"
               type="file"
               id={`bannerImg-${id}`}
               name="bannerImg"
-              className="mb-3 w-1/2"
+              className="w-1/2"
             />
           </div>
 
           <Wysiwyg
-            label="Description"
+            label="Course Description"
             id={`desc-${id}`}
             name="desc"
-            className="mb-3"
+            className="mb-6"
           />
-          <div className="mt-8">
+
+          {/* What students will learn */}
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              What students will learn{" "}
+              <Tooltip title="Add key learning outcomes that students will achieve by the end of this course.">
+                <IconButton size="small">
+                  <MdInfo className="text-sm" />
+                </IconButton>
+              </Tooltip>
+            </label>
+
+            {learningPoints.map((point: string, index: number) => (
+              <div key={index} className="flex items-center gap-1 mb-3">
+                <Input
+                  id={`learning-${index}`}
+                  name={`learning-${index}`}
+                  label=""
+                  type="text"
+                  placeholder={`Learning point ${index + 1}`}
+                  value={point}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleLearningPointChange(index, e.target.value)
+                  }
+                  className="flex-1"
+                />
+
+                <IconButton
+                  color="error"
+                  onClick={() => handleRemoveLearningPoint(index)}
+                  disabled={learningPoints.length === 1}
+                >
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+
+                {index === learningPoints.length - 1 && (
+                  <IconButton color="primary" onClick={handleAddLearningPoint}>
+                    <AddCircleOutlineIcon />
+                  </IconButton>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Course Sections */}
+          <div className="mt-8 pt-6 border-t border-gray-100">
             <label className="block text-sm font-medium text-gray-700 mb-3">
               Course Sections{" "}
-              <Tooltip title="You can add lessons to each section on the course details page.">
-                <IconButton>
+              <Tooltip title="You can add lessons to each section on the course details page after creating the course.">
+                <IconButton size="small">
                   <MdInfo className="text-sm" />
                 </IconButton>
               </Tooltip>
@@ -75,9 +173,9 @@ const CreateCourse = () => {
             {sections.map((section: string, index: number) => (
               <div key={index} className="flex items-center gap-1 mb-3">
                 <Input
-                  id=""
-                  name=""
-                  label={``}
+                  id={`section-${index}`}
+                  name={`section-${index}`}
+                  label=""
                   type="text"
                   placeholder={`Section ${index + 1} title`}
                   value={section}
@@ -87,7 +185,6 @@ const CreateCourse = () => {
                   className="flex-1"
                 />
 
-                {/* Remove Section */}
                 <IconButton
                   color="error"
                   onClick={() => handleRemoveSection(index)}
@@ -96,7 +193,6 @@ const CreateCourse = () => {
                   <RemoveCircleOutlineIcon />
                 </IconButton>
 
-                {/* Add Section */}
                 {index === sections.length - 1 && (
                   <IconButton color="primary" onClick={handleAddSection}>
                     <AddCircleOutlineIcon />
@@ -105,38 +201,23 @@ const CreateCourse = () => {
               </div>
             ))}
           </div>
+
           <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-100">
             {courseId && (
-              <button className="text-red-500 hover:text-red-600 text-sm font-medium mr-6 cursor-pointer transition-colors">
+              <button
+                type="button"
+                className="text-red-500 hover:text-red-600 text-sm font-medium mr-6 cursor-pointer transition-colors"
+              >
                 Delete course
               </button>
             )}
-            <Button text={courseId ? "Update Course" : "Create Course"} />
+            <Button
+              text={courseId ? "Update Course" : "Create Course"}
+              type="submit"
+            />
           </div>
         </form>
       </div>
-      {/* <div
-        className="flex-1 flex justify-center items-start border rounded-lg bg-gray-50 shadow-inner overflow-auto"
-        style={{
-          height: "650px",
-          padding: "1rem",
-        }}
-      >
-        <div
-          style={{
-            width: "1440px", // full desktop width
-            transform: "scale(0.7)", // zoom out (adjust 0.6–0.8)
-            transformOrigin: "top center",
-            border: "1px solid #e5e7eb",
-            borderRadius: "8px",
-            overflow: "hidden",
-            boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-            background: "white",
-          }}
-        >
-          <CourseDetails />
-        </div>
-      </div> */}
     </Layout>
   );
 };

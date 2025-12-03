@@ -1,5 +1,5 @@
 export interface IAccordionItem {
-  title: string;
+  title: React.ReactNode;
   content: React.ReactNode;
   actions?: React.ReactNode;
   defaultExpanded?: boolean;

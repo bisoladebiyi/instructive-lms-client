@@ -3,8 +3,17 @@ import Layout from "../../../components/Layout";
 import { IROUTES } from "../../../utils/constants/routes";
 import Wysiwyg from "../../../components/ui/Wysiwyg";
 import Input from "../../../components/ui/Input";
+import SelectFilter from "../../../components/ui/SelectFilter";
 import Button from "../../../components/ui/Button";
 import { useParams } from "react-router";
+
+// Dummy sections
+const courseSections = [
+  "Section 1: Getting Started with Node.js",
+  "Section 2: Core Concepts and Modules",
+  "Section 3: Building REST APIs with Express",
+  "Section 4: Authentication & Deployment",
+];
 
 const AddLesson = () => {
   const { lessonId } = useParams();
@@ -12,6 +21,7 @@ const AddLesson = () => {
   const [contentType, setContentType] = useState<"video" | "pdf" | "text">(
     "text"
   );
+  const [selectedSection, setSelectedSection] = useState(courseSections[0]);
 
   return (
     <Layout
@@ -38,32 +48,49 @@ const AddLesson = () => {
             className="mb-4 w-1/2"
           />
         </div>
+        <div className="flex gap-2">
+          {/* Content type selector */}
+          <div className="mb-6 w-1/2">
+            <label className="text-sm font-medium text-gray-700">
+              Lesson Type
+            </label>
+            <div className="flex gap-3 mt-2">
+              {["video", "pdf", "text"].map((type) => (
+                <label
+                  key={type}
+                  className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${
+                    contentType === type
+                      ? "bg-primary-600 text-white border-primary-600 shadow-sm"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-primary-300 hover:bg-primary-50"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={type}
+                    checked={contentType === type}
+                    onChange={() =>
+                      setContentType(type as "video" | "pdf" | "text")
+                    }
+                    className="hidden"
+                  />
+                  {type === "text" ? "Text (WYSIWYG)" : type.toUpperCase()}
+                </label>
+              ))}
+            </div>
+          </div>
 
-        {/* Content type selector */}
-        <div className="mb-6">
-          <label className="text-sm font-medium text-gray-700">Lesson Type</label>
-          <div className="flex gap-3 mt-2">
-            {["video", "pdf", "text"].map((type) => (
-              <label
-                key={type}
-                className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${
-                  contentType === type
-                    ? "bg-primary-600 text-white border-primary-600 shadow-sm"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-primary-300 hover:bg-primary-50"
-                }`}
-              >
-                <input
-                  type="radio"
-                  value={type}
-                  checked={contentType === type}
-                  onChange={() =>
-                    setContentType(type as "video" | "pdf" | "text")
-                  }
-                  className="hidden"
-                />
-                {type === "text" ? "Text (WYSIWYG)" : type.toUpperCase()}
-              </label>
-            ))}
+          {/* Section selector */}
+          <div className="mb-4 w-1/2">
+            <label className="text-sm font-medium text-gray-700 block mb-1.5">
+              Course Section
+            </label>
+            <SelectFilter
+              label="Select section"
+              value={selectedSection}
+              options={courseSections}
+              onChange={setSelectedSection}
+              fullWidth
+            />
           </div>
         </div>
 

@@ -2,6 +2,50 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import CourseCard from "../../../components/ui/CourseCard";
 import { Link } from "react-router";
 import { IROUTES } from "../../../utils/constants/routes";
+import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
+
+const recentCourses: ICourseCardData[] = [
+  {
+    id: 1,
+    title: "Introduction to Node.js - A Beginner's Guide",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.5,
+    ratingCount: 300,
+    isPrivate: false,
+    bannerImg: "https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75",
+  },
+  {
+    id: 2,
+    title: "Advanced React Patterns",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.8,
+    ratingCount: 450,
+    isPrivate: false,
+    bannerImg: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+  },
+  {
+    id: 3,
+    title: "TypeScript Masterclass",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.7,
+    ratingCount: 280,
+    isPrivate: true,
+    bannerImg: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800",
+  },
+  {
+    id: 4,
+    title: "Building REST APIs with Express",
+    instructor: "Abisola Adebiyi",
+    category: "Development",
+    rating: 4.6,
+    ratingCount: 520,
+    isPrivate: false,
+    bannerImg: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800",
+  },
+];
 
 const Courses = () => {
   return (
@@ -15,20 +59,13 @@ const Courses = () => {
         </Link>
       </div>
       <div className="grid grid-cols-4 gap-5">
-        {/* course cards  */}
-        {Array(4)
-          .fill(3)
-          .map((_, i) => (
-            <CourseCard
-              key={i}
-              id={i}
-              author="Abisola Adebiyi"
-              title="Introduction to node.js - A beginner's guide"
-              rating={4.5}
-              raters={300}
-              bannerImg="https://www.mbloging.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fyynr1uml%2Fproduction%2Fd1436504d3891835d2fb7150a6feaee968abf4a5-1024x576.jpg%3Fw%3D1024%26auto%3Dformat&w=3840&q=75"
-            />
-          ))}
+        {recentCourses.map((course) => (
+          <CourseCard
+            key={course.id}
+            course={course}
+            variant="instructor"
+          />
+        ))}
       </div>
     </section>
   );
