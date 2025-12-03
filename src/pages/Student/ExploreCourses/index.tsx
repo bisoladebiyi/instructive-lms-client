@@ -2,9 +2,11 @@ import { useState } from "react";
 import Layout from "../../../components/Layout";
 import SelectFilter from "../../../components/ui/SelectFilter";
 import CourseCard from "../../../components/ui/CourseCard";
+import EmptyState from "../../../components/ui/EmptyState";
 import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
 import { IROUTES } from "../../../utils/constants/routes";
 import { IoIosSearch } from "react-icons/io";
+import SearchIcon from "@mui/icons-material/Search";
 
 const availableCourses: ICourseCardData[] = [
   {
@@ -149,18 +151,18 @@ const ExploreCourses = () => {
   return (
     <Layout parentPage={IROUTES.STUDENT_FIND_COURSES} pageHeading="Explore Courses" userType="student">
       <>
-        <div className="my-6 flex flex-wrap justify-between items-center gap-4">
+        <div className="my-4 sm:my-6 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
           <div className="relative">
             <input
               type="search"
               placeholder="Search courses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-white py-2.5 px-4 pl-10 text-sm w-80 rounded-lg border border-gray-200 text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
+              className="bg-white py-2.5 px-4 pl-10 text-sm w-full sm:w-80 rounded-lg border border-gray-200 text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
             />
             <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <SelectFilter
               label="Category"
               value={categoryFilter}
@@ -170,13 +172,13 @@ const ExploreCourses = () => {
           </div>
         </div>
 
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-xs sm:text-sm text-gray-500 mb-4">
           Showing {filteredCourses.length} of {availableCourses.length} courses
         </p>
 
         {/* Course grid list */}
         {filteredCourses.length > 0 ? (
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {filteredCourses.map((course) => (
               <CourseCard
                 key={course.id}
@@ -186,9 +188,11 @@ const ExploreCourses = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No courses found matching your criteria.</p>
-          </div>
+          <EmptyState
+            icon={<SearchIcon sx={{ fontSize: 32, color: "#9ca3af" }} />}
+            title="No courses found"
+            description="We couldn't find any courses matching your search criteria. Try adjusting your filters or search terms."
+          />
         )}
       </>
     </Layout>

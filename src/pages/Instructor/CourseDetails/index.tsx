@@ -99,13 +99,13 @@ const InstructorCourseDetails = () => {
   }));
 
   return (
-    <Layout parentPage={IROUTES.COURSES}>
+    <Layout parentPage={IROUTES.COURSES} pageHeading="Course Details" hideHeadingOnDesktop>
       <>
-        <div className="bg-sidebar -mx-8 -mt-8 px-8 py-8 mb-8">
+        <div className="bg-sidebar -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 mb-6 sm:mb-8">
           <div className="max-w-6xl mx-auto">
-            <div className="flex gap-8">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
               {/* Course Info */}
-              <div className="flex-1 text-white">
+              <div className="flex-1 text-white order-2 lg:order-1">
                 {/* Status badge */}
                 <div className="flex items-center gap-2 mb-3">
                   <span className={`text-xs px-2 py-1 rounded-full font-medium ${
@@ -120,14 +120,14 @@ const InstructorCourseDetails = () => {
                   </span>
                 </div>
 
-                <h1 className="text-2xl font-bold mb-3">{courseData.title}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold mb-3">{courseData.title}</h1>
                 <p className="text-gray-300 text-sm mb-4 line-clamp-2">{courseData.description}</p>
 
-                <div className="flex items-center gap-4 text-sm mb-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm mb-4">
                   <div className="flex items-center gap-1">
                     <Rating value={courseData.rating} readOnly precision={0.5} size="small" sx={{ "& .MuiRating-iconFilled": { color: "#fbbf24" } }} />
                     <span className="text-amber-400 font-medium">{courseData.rating}</span>
-                    <span className="text-gray-400">({courseData.ratingCount} ratings)</span>
+                    <span className="text-gray-400">({courseData.ratingCount})</span>
                   </div>
                   <span className="text-gray-400">{courseData.studentsEnrolled.toLocaleString()} students</span>
                 </div>
@@ -141,24 +141,24 @@ const InstructorCourseDetails = () => {
                   <span className="text-gray-300 text-sm">Created by {courseData.instructor.name}</span>
                 </div>
 
-                <div className="flex items-center gap-4 text-xs text-gray-400">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-gray-400">
                   <span className="flex items-center gap-1">
                     <FaClock /> {courseData.duration}
                   </span>
                   <span className="flex items-center gap-1">
                     <FaBookOpen /> {courseData.totalLessons} lessons
                   </span>
-                  <span>Last updated {courseData.lastUpdated}</span>
+                  <span className="hidden sm:inline">Last updated {courseData.lastUpdated}</span>
                 </div>
               </div>
 
               {/* Course Banner */}
-              <div className="w-80 shrink-0">
+              <div className="w-full lg:w-80 shrink-0 order-1 lg:order-2">
                 <div className="rounded-xl overflow-hidden shadow-lg">
                   <img
                     src={courseData.bannerUrl}
                     alt={courseData.title}
-                    className="w-full h-44 object-cover"
+                    className="w-full h-40 sm:h-44 object-cover"
                   />
                   <div className="bg-white p-4 space-y-2">
                     <Button
@@ -183,9 +183,9 @@ const InstructorCourseDetails = () => {
           <div className="flex gap-8">
             <div className="flex-1">
               {/* What you'll learn */}
-              <div className="bg-white rounded-xl border border-gray-100 p-6 mb-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">What students will learn</h2>
-                <ul className="grid grid-cols-2 gap-3">
+              <div className="bg-white rounded-xl border border-gray-100 p-4 sm:p-6 mb-6">
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">What students will learn</h2>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {courseData.whatYouWillLearn.map((item, index) => (
                     <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
                       <FaCheck className="text-green-500 mt-1 shrink-0" />
@@ -198,7 +198,7 @@ const InstructorCourseDetails = () => {
               {/* Curriculum */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900">Course Content</h2>
+                  <h2 className="text-base sm:text-lg font-semibold text-gray-900">Course Content</h2>
                   <Link to={`/instructor/courses/${courseId}/lessons/create`}>
                     <button className="text-sm text-primary-600 hover:text-primary-700 font-medium cursor-pointer">
                       + Add Lesson

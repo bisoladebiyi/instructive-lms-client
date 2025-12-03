@@ -5,12 +5,8 @@ import Input from "../../../components/ui/Input";
 import Button from "../../../components/ui/Button";
 import { Tabs, Tab, Box, Avatar } from "@mui/material";
 import { FaCamera } from "react-icons/fa";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import toast from "react-hot-toast";
+import type { TabPanelProps } from "../../../interfaces/VerticalTabs.interface";
 
 const TabPanel = ({ children, value, index }: TabPanelProps) => {
   return (
@@ -28,9 +24,39 @@ const TabPanel = ({ children, value, index }: TabPanelProps) => {
 const Settings = () => {
   const id = useId();
   const [activeTab, setActiveTab] = useState(0);
+  const [isProfileLoading, setIsProfileLoading] = useState(false);
+  const [isPasswordLoading, setIsPasswordLoading] = useState(false);
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
+  };
+
+  const handleProfileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProfileLoading(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Profile updated successfully!");
+    } catch {
+      toast.error("Failed to update profile. Please try again.");
+    } finally {
+      setIsProfileLoading(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsPasswordLoading(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Password updated successfully!");
+    } catch {
+      toast.error("Failed to update password. Please try again.");
+    } finally {
+      setIsPasswordLoading(false);
+    }
   };
 
   return (
@@ -65,18 +91,18 @@ const Settings = () => {
 
           {/* personal info tab */}
           <TabPanel value={activeTab} index={0}>
-            <form className="p-8 pt-4">
+            <form onSubmit={handleProfileSubmit} className="p-4 sm:p-8 pt-4">
               <div className="mb-6">
                 <label className="text-sm block mb-3">Profile Picture</label>
-                <div className="relative w-24 h-24">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24">
                   <Avatar
                     src="https://avatar.iran.liara.run/public/job/teacher/male"
                     alt="Profile"
-                    sx={{ width: 96, height: 96 }}
+                    sx={{ width: { xs: 80, sm: 96 }, height: { xs: 80, sm: 96 } }}
                   />
                   <label
                     htmlFor={`avatar-${id}`}
-                    className="absolute bottom-0 right-0 bg-primary-600 text-white p-2 rounded-full cursor-pointer hover:bg-primary-700 transition-colors shadow-md"
+                    className="absolute bottom-0 right-0 bg-primary-600 text-white p-1.5 sm:p-2 rounded-full cursor-pointer hover:bg-primary-700 transition-colors shadow-md"
                   >
                     <FaCamera className="text-xs" />
                   </label>
@@ -90,14 +116,14 @@ const Settings = () => {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Input
                   label="First Name"
                   type="text"
                   id={`firstName-${id}`}
                   name="firstName"
                   placeholder="Enter your first name"
-                  className="mb-4 w-1/2"
+                  className="mb-4 w-full sm:w-1/2"
                 />
                 <Input
                   label="Last Name"
@@ -105,7 +131,7 @@ const Settings = () => {
                   id={`lastName-${id}`}
                   name="lastName"
                   placeholder="Enter your last name"
-                  className="mb-4 w-1/2"
+                  className="mb-4 w-full sm:w-1/2"
                 />
               </div>
 
@@ -141,15 +167,15 @@ const Settings = () => {
               </div>
 
               <div className="flex justify-end mt-6">
-                <Button text="Save Changes" type="submit" />
+                <Button text="Save Changes" type="submit" loading={isProfileLoading} />
               </div>
             </form>
           </TabPanel>
 
           {/* Change Password tab */}
           <TabPanel value={activeTab} index={1}>
-            <form className="p-8 pt-4">
-              <div className="max-w-md">
+            <form onSubmit={handlePasswordSubmit} className="p-4 sm:p-8 pt-4">
+              <div className="w-full sm:max-w-md">
                 <Input
                   label="Current Password"
                   type="password"
@@ -183,7 +209,7 @@ const Settings = () => {
                 </p>
 
                 <div className="flex justify-end">
-                  <Button text="Update Password" type="submit" />
+                  <Button text="Update Password" type="submit" loading={isPasswordLoading} />
                 </div>
               </div>
             </form>

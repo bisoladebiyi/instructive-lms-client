@@ -8,3 +8,5 @@ export interface ILesson {
   pdfUrl?: string;
   isCompleted: boolean;
 }
+
+export type IInstructorLesson = Omit<ILesson, "isCompleted">

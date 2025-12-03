@@ -1,8 +1,10 @@
 import { IoIosArrowRoundForward } from "react-icons/io";
 import CourseCard from "../../../components/ui/CourseCard";
+import EmptyState from "../../../components/ui/EmptyState";
 import { Link } from "react-router";
 import { IROUTES } from "../../../utils/constants/routes";
 import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const recentCourses: ICourseCardData[] = [
   {
@@ -58,15 +60,25 @@ const Courses = () => {
           </p>
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-5">
-        {recentCourses.map((course) => (
-          <CourseCard
-            key={course.id}
-            course={course}
-            variant="instructor"
-          />
-        ))}
-      </div>
+      {recentCourses.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {recentCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              variant="instructor"
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          icon={<MenuBookIcon sx={{ fontSize: 32, color: "#9ca3af" }} />}
+          title="No courses yet"
+          description="Create your first course to start sharing your knowledge."
+          actionLabel="Create Course"
+          actionLink={IROUTES.COURSE_CREATE}
+        />
+      )}
     </section>
   );
 };

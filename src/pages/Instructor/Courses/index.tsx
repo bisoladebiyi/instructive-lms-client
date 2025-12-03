@@ -3,8 +3,10 @@ import CourseCard from "../../../components/ui/CourseCard";
 import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
 import Layout from "../../../components/Layout";
 import SelectFilter from "../../../components/ui/SelectFilter";
+import EmptyState from "../../../components/ui/EmptyState";
 import { IROUTES } from "../../../utils/constants/routes";
 import { IoIosSearch } from "react-icons/io";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const visibilityOptions = ["All", "Public", "Private"];
 
@@ -85,14 +87,14 @@ const Courses = () => {
     <Layout parentPage={IROUTES.COURSES} pageHeading={"Courses"}>
       <>
         {/* search and filter  */}
-        <div className="my-6 flex justify-between items-center">
+        <div className="my-4 sm:my-6 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
           <div className="relative">
             <input
               type="search"
               name=""
               id=""
               placeholder="Search courses..."
-              className="bg-white py-2.5 px-4 pl-10 text-sm w-80 rounded-lg border border-gray-200 text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
+              className="bg-white py-2.5 px-4 pl-10 text-sm w-full sm:w-80 rounded-lg border border-gray-200 text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
             />
             <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           </div>
@@ -104,16 +106,25 @@ const Courses = () => {
             minWidth={120}
           />
         </div>
-        <div className="grid grid-cols-4 gap-5">
-          {/* course cards  */}
-          {filteredCourses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              variant="instructor"
-            />
-          ))}
-        </div>
+        {filteredCourses.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {filteredCourses.map((course) => (
+              <CourseCard
+                key={course.id}
+                course={course}
+                variant="instructor"
+              />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            icon={<MenuBookIcon sx={{ fontSize: 32, color: "#9ca3af" }} />}
+            title="No courses found"
+            description="You haven't created any courses yet. Start by creating your first course to share your knowledge with students."
+            actionLabel="Create Course"
+            actionLink={IROUTES.COURSE_CREATE}
+          />
+        )}
       </>
     </Layout>
   );
