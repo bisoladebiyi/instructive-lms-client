@@ -1,9 +1,17 @@
-export interface ICourseCard {
-    id: string | number;
-    title: string;
-    author: string;
-    rating: number;
-    raters: number;
-    bannerImg: string;
-    isPrivate?: boolean;
+export interface ICourseCardData {
+  id: number;
+  title: string;
+  instructor: string;
+  category?: string;
+  bannerImg: string;
+  progress?: number;
+  rating?: number;
+  ratingCount?: number;
+  studentsEnrolled?: number;
+  isPrivate?: boolean;
+}
+
+export interface ICourseCardProps {
+  course: ICourseCardData;
+  variant?: "enrolled" | "explore" | "instructor";
 }
