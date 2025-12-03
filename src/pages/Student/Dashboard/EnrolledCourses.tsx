@@ -2,7 +2,9 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { Link } from "react-router";
 import { IROUTES } from "../../../utils/constants/routes";
 import CourseCard from "../../../components/ui/CourseCard";
+import EmptyState from "../../../components/ui/EmptyState";
 import type { ICourseCardData } from "../../../interfaces/CourseCard.interface";
+import SchoolIcon from "@mui/icons-material/School";
 
 const enrolledCourses: ICourseCardData[] = [
   {
@@ -41,24 +43,34 @@ const enrolledCourses: ICourseCardData[] = [
 
 const EnrolledCourses = () => {
   return (
-    <section className="mt-10">
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="font-semibold text-lg text-gray-900">Continue Learning</h2>
+    <section className="mt-8 sm:mt-10">
+      <div className="flex justify-between items-center mb-4 sm:mb-5">
+        <h2 className="font-semibold text-base sm:text-lg text-gray-900">Continue Learning</h2>
         <Link to={IROUTES.STUDENT_COURSES}>
-          <p className="flex items-center gap-1 text-primary-600 hover:text-primary-700 hover:gap-2 transition-all cursor-pointer text-sm font-medium">
-            View all courses <IoIosArrowRoundForward className="text-lg" />
+          <p className="flex items-center gap-1 text-primary-600 hover:text-primary-700 hover:gap-2 transition-all cursor-pointer text-xs sm:text-sm font-medium">
+            View all <IoIosArrowRoundForward className="text-lg" />
           </p>
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-5">
-        {enrolledCourses.map((course) => (
-          <CourseCard
-            key={course.id}
-            course={course}
-            variant="enrolled"
-          />
-        ))}
-      </div>
+      {enrolledCourses.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {enrolledCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              variant="enrolled"
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          icon={<SchoolIcon sx={{ fontSize: 32, color: "#9ca3af" }} />}
+          title="No courses yet"
+          description="Start your learning journey by enrolling in a course."
+          actionLabel="Explore Courses"
+          actionLink={IROUTES.STUDENT_FIND_COURSES}
+        />
+      )}
     </section>
   );
 };

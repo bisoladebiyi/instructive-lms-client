@@ -4,16 +4,7 @@ import Button from "../../../components/ui/Button";
 import { IROUTES } from "../../../utils/constants/routes";
 import { FaPlay, FaChevronLeft, FaList, FaPen } from "react-icons/fa6";
 import { FaFilePdf } from "react-icons/fa";
-
-interface IInstructorLesson {
-  id: string;
-  title: string;
-  duration: string;
-  type: "video" | "text" | "pdf";
-  videoUrl?: string;
-  textContent?: string;
-  pdfUrl?: string;
-}
+import type { IInstructorLesson } from "../../../interfaces/Lesson.interface";
 
 // Dummy data
 const lessonsData: Record<string, IInstructorLesson> = {
@@ -138,25 +129,25 @@ const InstructorLessonDetails = () => {
   }
 
   return (
-    <Layout parentPage={IROUTES.COURSES}>
-      <div className="flex gap-6 -mt-2">
+    <Layout parentPage={IROUTES.COURSES} pageHeading="Lesson" hideHeadingOnDesktop>
+      <div className="flex flex-col lg:flex-row gap-6 mt-8">
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 order-2 lg:order-1">
           {/* Lesson Header */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 to={`/instructor/courses/${courseId}`}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
               >
                 <FaChevronLeft />
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">
+              <h1 className="text-base sm:text-xl font-bold text-gray-900 line-clamp-1">
                 {lesson.title}
               </h1>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+            <div className="flex items-center gap-3 ml-6 sm:ml-0">
+              <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 sm:px-3 py-1 rounded-full">
                 {lesson.duration}
               </span>
               <Link
@@ -267,8 +258,8 @@ const InstructorLessonDetails = () => {
         </div>
 
         {/* Course Content Sidebar */}
-        <div className="w-80 shrink-0">
-          <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden sticky top-6">
+        <div className="w-full lg:w-80 shrink-0 order-1 lg:order-2">
+          <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden lg:sticky lg:top-6">
             {/* Header */}
             <div className="p-4 border-b border-gray-100">
               <div className="flex items-center justify-between">
@@ -284,7 +275,7 @@ const InstructorLessonDetails = () => {
               </div>
             </div>
 
-            <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
+            <div className="max-h-64 lg:max-h-[calc(100vh-250px)] overflow-y-auto">
               {courseSections.map((section, sectionIndex) => (
                 <div key={sectionIndex}>
                   <div className="px-4 py-2 bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wide">

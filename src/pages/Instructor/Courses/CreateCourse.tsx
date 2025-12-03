@@ -10,6 +10,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { MdInfo } from "react-icons/md";
 import Button from "../../../components/ui/Button";
 import { useParams } from "react-router";
+import toast from "react-hot-toast";
 
 const categories = [
   "Development",
@@ -26,6 +27,38 @@ const CreateCourse = () => {
   const [sections, setSections] = useState<string[]>([""]);
   const [category, setCategory] = useState("Development");
   const [learningPoints, setLearningPoints] = useState<string[]>([""]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Simulate API call
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success(
+        courseId ? "Course updated successfully!" : "Course created successfully!"
+      );
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this course?")) return;
+
+    setIsLoading(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      toast.success("Course deleted successfully!");
+    } catch {
+      toast.error("Failed to delete course. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleAddSection = () => {
     setSections((prev) => [...prev, ""]);
@@ -62,22 +95,22 @@ const CreateCourse = () => {
     >
       <div className="w-full">
         <form
-          action=""
-          className="w-full mt-6 bg-white border border-gray-100 rounded-xl p-8 shadow-sm"
+          onSubmit={handleSubmit}
+          className="w-full mt-4 sm:mt-6 bg-white border border-gray-100 rounded-xl p-4 sm:p-8 shadow-sm"
         >
           <h3 className="text-base font-semibold text-gray-900 mb-4">
             Basic Information
           </h3>
-          <div className="flex gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <Input
               label="Course Title"
               type="text"
               id={`title-${id}`}
               name="title"
               placeholder="e.g. Introduction to Node.js"
-              className="w-1/2"
+              className="w-full sm:w-1/2"
             />
-            <div className="w-1/2">
+            <div className="w-full sm:w-1/2">
               <label className="text-sm font-medium text-gray-700 block mb-1.5">
                 Category
               </label>
@@ -91,21 +124,21 @@ const CreateCourse = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <Input
               label="Duration (e.g. 8h 30m)"
               type="text"
               id={`duration-${id}`}
               name="duration"
               placeholder="e.g. 8h 30m"
-              className="w-1/2"
+              className="w-full sm:w-1/2"
             />
             <Input
               label="Banner Image"
               type="file"
               id={`bannerImg-${id}`}
               name="bannerImg"
-              className="w-1/2"
+              className="w-full sm:w-1/2"
             />
           </div>
 
@@ -202,11 +235,13 @@ const CreateCourse = () => {
             ))}
           </div>
 
-          <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-100">
+          <div className="flex flex-col-reverse sm:flex-row justify-end items-stretch sm:items-center mt-6 sm:mt-8 pt-6 border-t border-gray-100 gap-3 sm:gap-0">
             {courseId && (
               <button
                 type="button"
-                className="text-red-500 hover:text-red-600 text-sm font-medium mr-6 cursor-pointer transition-colors"
+                onClick={handleDelete}
+                disabled={isLoading}
+                className="text-red-500 hover:text-red-600 text-sm font-medium sm:mr-6 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Delete course
               </button>
@@ -214,6 +249,7 @@ const CreateCourse = () => {
             <Button
               text={courseId ? "Update Course" : "Create Course"}
               type="submit"
+              loading={isLoading}
             />
           </div>
         </form>

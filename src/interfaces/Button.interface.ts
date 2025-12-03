@@ -3,4 +3,6 @@ export interface IButton {
     text: string;
     onClick?: () => void;
     type?: "button" | "reset" | "submit" | undefined;
+    loading?: boolean;
+    disabled?: boolean;
 }

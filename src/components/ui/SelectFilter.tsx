@@ -1,14 +1,8 @@
 import { FormControl, Select, MenuItem } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material";
+import type { ISelectFilterProps } from "../../interfaces/SelectFilter.interface";
 
-interface SelectFilterProps {
-  label: string;
-  value: string;
-  options: string[];
-  onChange: (value: string) => void;
-  minWidth?: number;
-  fullWidth?: boolean;
-}
+
 
 const SelectFilter = ({
   label,
@@ -17,7 +11,7 @@ const SelectFilter = ({
   onChange,
   minWidth = 100,
   fullWidth = false,
-}: SelectFilterProps) => {
+}: ISelectFilterProps) => {
   const handleChange = (event: SelectChangeEvent) => {
     onChange(event.target.value);
   };

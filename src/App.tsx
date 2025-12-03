@@ -3,6 +3,7 @@ import SignUp from "./pages/Auth/SignUp.tsx";
 import Login from "./pages/Auth/Login.tsx";
 import { IROUTES } from "./utils/constants/routes.ts";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 // Instructor Pages
 import Dashboard from "./pages/Instructor/Dashboard/index.tsx";
 import Courses from "./pages/Instructor/Courses/index.tsx";
@@ -32,6 +33,31 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#fff",
+            color: "#1f2937",
+            fontSize: "14px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#10b981",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
       <Routes>
         {/* Auth Routes */}
         <Route path={IROUTES.SIGNUP} element={<SignUp />} />

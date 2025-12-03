@@ -1,6 +1,5 @@
-interface ILogo {
-  className?: string;
-}
+import type { ILogo } from "../../interfaces/Layout.interface";
+
 const Logo = ({ className }: ILogo) => {
   return (
     <div className={`font-semibold text-xl tracking-tight ${className}`}>

@@ -7,11 +7,23 @@ export interface ILayout {
     parentPage?: string;
     pageHeading?: string;
     userType?: UserType;
+    hideHeadingOnDesktop?: boolean;
 }
 
-export type ISideNav = Omit<ILayout, "children">
+export interface ISideNav {
+    parentPage?: string;
+    userType?: UserType;
+    isOpen?: boolean;
+    onClose?: () => void;
+}
 
 export interface ITopNav {
     text?: string;
     userType?: UserType;
+    onMenuClick?: () => void;
+    hideHeadingOnDesktop?: boolean;
+}
+
+export interface ILogo {
+  className?: string;
 }

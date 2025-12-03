@@ -40,19 +40,19 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="w-full mt-6 grid grid-cols-4 gap-5">
+    <section className="w-full mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className={`${stat.bgColor} rounded-xl p-5 transition-all duration-200 hover:shadow-md`}
+          className={`${stat.bgColor} rounded-xl p-4 sm:p-5 transition-all duration-200 hover:shadow-md`}
         >
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">{stat.label}</p>
-              <h2 className="text-3xl font-bold text-gray-900">{stat.value}</h2>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">{stat.label}</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</h2>
             </div>
-            <div className={`${stat.iconBg} p-3 rounded-lg`}>
-              <stat.icon className={`text-xl ${stat.iconColor}`} />
+            <div className={`${stat.iconBg} p-2 sm:p-3 rounded-lg`}>
+              <stat.icon className={`text-lg sm:text-xl ${stat.iconColor}`} />
             </div>
           </div>
         </div>
